@@ -19,7 +19,8 @@ public class EjemploStreamFilterSingle2 {
     public static void main(String[] args) {
 
         System.out.println("\n\tHola Stream");
-        ejemplo01FiltrerStream();
+       // ejemplo01FiltrerStream();
+        ejemplo04Filter();
     }
 
     public static void ejemplo01FiltrerStream() {
@@ -50,5 +51,22 @@ public class EjemploStreamFilterSingle2 {
             System.out.println("No se pudo encontrar");
         }
 
+    }
+
+    public static void ejemplo04Filter() {
+
+        System.out.println("\tEJEMPLO FILTER");
+        int idBuscar = 4;
+        Usuario usuario = Stream.
+                of("Pato Guzman",
+                        "Paco Gonzales",
+                        "Pepa Gutierrez",
+                        "Pepe Mena",
+                        "Pepe Garcia")
+                .map(nombre -> new Usuario(nombre.split(" ")[0], nombre.split(" ")[1]))
+                .peek(System.out::println)
+                .filter(u -> u.getId().equals(idBuscar))
+                .findFirst().get();
+        System.out.println("RESULTADO => "+usuario);
     }
 }
