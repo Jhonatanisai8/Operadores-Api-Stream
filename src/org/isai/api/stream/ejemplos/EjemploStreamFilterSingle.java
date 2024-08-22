@@ -1,6 +1,7 @@
 package org.isai.api.stream.ejemplos;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.isai.api.stream.ejemplos.models.Usuario;
@@ -14,22 +15,28 @@ poderosas cuando se trabaja con Streams, permitiendo que solo los
 elementos que cumplan con un determinado criterio pasen a la 
 siguiente etapa del procesamiento.
  */
-public class EjemploStreamFilter {
-    
+public class EjemploStreamFilterSingle {
+
     public static void main(String[] args) {
-        
+
         System.out.println("\n\tHola Stream");
-        ejemplo03MapStreamApellido();
+        ejemplo01FiltrerStream();
     }
-    
-    public static void ejemplo03MapStreamApellido() {
-        
-        System.out.println("\tOperador map y peek con Objetos");
-        //creamos un Stream de tipo String
-        
+
+    public static void ejemplo01FiltrerStream() {
+
+        System.out.println("\tOperador Filter con Objetos");
         /*
-        en este ejemplo filtra los usuario por nombre pepe
-        */
+        1- creacion del Stream
+        2- Transformacion del Stream map
+        3- filtrado con filter cuyo nombre es pepe:
+        4- Inspección con peek.
+        5- Operación Terminal findFirst: findFirst es una operación 
+        terminal que devuelve un Optional<Usuario> con el primer
+        elemento del Stream que cumple con las condiciones anteriores.
+        6- Salida del Resultado.
+        
+         */
         Stream<Usuario> nombres = Stream.
                 of("Pato Guzman",
                         "Paco Gonzales",
@@ -39,8 +46,8 @@ public class EjemploStreamFilter {
                 .map(nombre -> new Usuario(nombre.split(" ")[0], nombre.split(" ")[1]))
                 .filter(u -> u.getNombre().equals("Pepe"))
                 .peek(System.out::println);
-        
-        List<Usuario> listaNombre = nombres.collect(Collectors.toList());
-        listaNombre.forEach(System.out::println);
+
+        Optional<Usuario> usuario = nombres.findFirst();
+        System.out.println(usuario.get());
     }
 }
