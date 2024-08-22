@@ -1,8 +1,7 @@
 package org.isai.api.stream.ejemplos;
 
-import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.isai.api.stream.ejemplos.models.Usuario;
 
@@ -15,7 +14,7 @@ poderosas cuando se trabaja con Streams, permitiendo que solo los
 elementos que cumplan con un determinado criterio pasen a la 
 siguiente etapa del procesamiento.
  */
-public class EjemploStreamFilterSingle {
+public class EjemploStreamFilterSingle2 {
 
     public static void main(String[] args) {
 
@@ -27,27 +26,29 @@ public class EjemploStreamFilterSingle {
 
         System.out.println("\tOperador Filter con Objetos");
         /*
-        1- creacion del Stream
-        2- Transformacion del Stream map
-        3- filtrado con filter cuyo nombre es pepe:
-        4- Inspección con peek.
-        5- Operación Terminal findFirst: findFirst es una operación 
-        terminal que devuelve un Optional<Usuario> con el primer
-        elemento del Stream que cumple con las condiciones anteriores.
-        6- Salida del Resultado.
-        
+        1. Definición del idBuscar:
+        2. Creación del Stream:
+        3. findFirst():
+            Busca el primer Usuario que cumpla con el criterio especificado por el filter.
+        4. get():
+            Extrae el valor del Optional si está presente. Si no hay ningún usuario que coincida, 
+            lanzará una excepción NoSuchElementException.
          */
-        Stream<Usuario> nombres = Stream.
-                of("Pato Guzman",
-                        "Paco Gonzales",
-                        "Pepa Gutierrez",
-                        "Pepe Mena",
-                        "Pepe Garcia")
-                .map(nombre -> new Usuario(nombre.split(" ")[0], nombre.split(" ")[1]))
-                .filter(u -> u.getNombre().equals("Pepe"))
-                .peek(System.out::println);
+        try {
+            int idBuscar = 120;
+            Usuario usuario = Stream.
+                    of("Pato Guzman",
+                            "Paco Gonzales",
+                            "Pepa Gutierrez",
+                            "Pepe Mena",
+                            "Pepe Garcia")
+                    .map(nombre -> new Usuario(nombre.split(" ")[0], nombre.split(" ")[1]))
+                    .filter(u -> u.getId().equals(idBuscar))
+                    .findFirst().get();
+            System.out.println(usuario);
+        } catch (NoSuchElementException e) {
+            System.out.println("No se pudo encontrar");
+        }
 
-        Optional<Usuario> usuario = nombres.findFirst();
-        System.out.println(usuario.get());
     }
 }
