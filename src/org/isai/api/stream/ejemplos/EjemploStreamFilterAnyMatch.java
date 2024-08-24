@@ -18,7 +18,8 @@ public class EjemploStreamFilterAnyMatch {
     public static void main(String[] args) {
 
         System.out.println("\n\tHola Stream");
-        ejemplo05AnyMatchlista();
+        //ejemplo05AnyMatchlista();
+        ejemplo04AnyMatch();
     }
 
     public static void ejemplo04AnyMatch() {
@@ -35,7 +36,7 @@ public class EjemploStreamFilterAnyMatch {
         */
         
         System.out.println("\tEJEMPLO ANY MATCH");
-        int idBuscar = 3;
+        int idBuscar = 1;
         
         boolean existe = Stream.
                 of("Pato Guzman",
