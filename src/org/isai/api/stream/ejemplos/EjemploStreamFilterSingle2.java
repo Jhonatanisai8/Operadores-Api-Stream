@@ -1,7 +1,6 @@
 package org.isai.api.stream.ejemplos;
 
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.stream.Stream;
 import org.isai.api.stream.ejemplos.models.Usuario;
 
@@ -19,8 +18,10 @@ public class EjemploStreamFilterSingle2 {
     public static void main(String[] args) {
 
         System.out.println("\n\tHola Stream");
-       // ejemplo01FiltrerStream();
-        ejemplo04Filter();
+        // ejemplo01FiltrerStream();
+        //ejemplo04Filter();
+        //ejemplo05FilterConOptional();
+        ejemplo06FilterConOptional();
     }
 
     public static void ejemplo01FiltrerStream() {
@@ -67,6 +68,26 @@ public class EjemploStreamFilterSingle2 {
                 .peek(System.out::println)
                 .filter(u -> u.getId().equals(idBuscar))
                 .findFirst().get();
-        System.out.println("RESULTADO => "+usuario);
+        System.out.println("RESULTADO => " + usuario);
     }
+
+    public static void ejemplo05FilterConOptional() {
+
+        System.out.println("\tEJEMPLO FILTER");
+        int idBuscar = 45;
+        Usuario usuario = Stream.
+                of("Pato Guzman",
+                        "Paco Gonzales",
+                        "Pepa Gutierrez",
+                        "Pepe Mena",
+                        "Pepe Garcia")
+                .map(nombre -> new Usuario(nombre.split(" ")[0], nombre.split(" ")[1]))
+                .peek(System.out::println)
+                .filter(u -> u.getId().equals(idBuscar))
+                /*devuelve un valor por defecto*/
+                .findFirst().orElseGet(() -> new Usuario("Jhon", "Doe"));
+
+        System.out.println("RESULTADO => " + usuario);
+    }
+
 }
