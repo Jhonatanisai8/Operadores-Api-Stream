@@ -21,7 +21,6 @@ public class EjemploStreamFilterSingle2 {
         // ejemplo01FiltrerStream();
         //ejemplo04Filter();
         //ejemplo05FilterConOptional();
-        ejemplo06FilterConOptional();
     }
 
     public static void ejemplo01FiltrerStream() {
