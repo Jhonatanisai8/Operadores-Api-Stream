@@ -1,5 +1,7 @@
 package org.isai.api.stream.ejemplos.models;
 
+import java.util.Objects;
+
 public class Usuario {
 
     private String nombre;
@@ -44,6 +46,32 @@ public class Usuario {
     @Override
     public String toString() {
         return nombre + " " + apellido;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 53 * hash + Objects.hashCode(this.nombre);
+        hash = 53 * hash + Objects.hashCode(this.apellido);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        return Objects.equals(this.apellido, other.apellido);
     }
 
 }
