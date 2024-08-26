@@ -1,5 +1,7 @@
 package org.isai.api.stream.ejemplos.models;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Usuario {
@@ -7,6 +9,7 @@ public class Usuario {
     private String nombre;
     private String apellido;
     private Integer id;
+    private List<Factura> facturas;
 
     private static int ultimoId;
 
@@ -17,6 +20,15 @@ public class Usuario {
         this.nombre = nombre;
         this.apellido = apellido;
         this.id = ++ultimoId;
+        this.facturas = new ArrayList<>();
+    }
+
+    public List<Factura> getFacturas() {
+        return facturas;
+    }
+
+    public void addFacuras(Factura f) {
+        this.facturas.add(f);
     }
 
     public Integer getId() {
